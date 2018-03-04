@@ -1,0 +1,29 @@
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$database="weblog";
+$con=mysqli_connect($servername,$username,$password,$database);
+if(!$con){
+  die("connection failed".$con->connect_error);
+}
+else
+{
+  $name=$_POST['name'];
+  $username=$_POST['username'];
+  $email=$_POST['email'];
+  $password=$_POST['password'];
+  $query="insert into bloggers (name,username,email,password) values('$name','$username','$email','$password')";
+  session_start(); 
+  if(mysqli_query($con,$query))
+  {
+   $_SESSION['status']=1;
+    //
+  }
+  else
+  {
+    $_SESSION['status']=0;
+  }
+  header('location:main.php');
+}
+?>
